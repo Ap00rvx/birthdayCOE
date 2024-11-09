@@ -38,11 +38,27 @@ const sendBirthdayEmail = async (member) => {
     to: member.email,
     subject: 'Happy Birthday!',
     html: `
-      <div style="text-align: center;">
-        <h1>Happy Birthday ${member.name},</h1>
-        <p>🎉🎂 Hope you have a wonderful day!</p>
-        <p><strong>Team BDCoE</strong></p>
-      </div>
+      <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto; text-align: center; padding: 20px; border: 1px solid #eaeaea; border-radius: 10px;">
+  <h1 style="color: #4CAF50;">🎉 Happy Birthday, ${member.name}! 🎉</h1>
+  
+  <p style="font-size: 1.1em; line-height: 1.6;">
+    On behalf of everyone at <strong>BDCOE</strong>, we want to take this moment to celebrate you and all that you bring to our team.
+  </p>
+  
+  <p style="font-size: 1.1em; line-height: 1.6;">
+    We hope your day is filled with joy, laughter, and special moments. May the year ahead bring new opportunities, growth, and fulfillment, both personally and professionally.
+  </p>
+
+  <p style="font-size: 1.1em; line-height: 1.6;">
+    Thank you for being such a valuable part of our community. Wishing you a fantastic birthday and a wonderful year ahead!
+  </p>
+
+  <p style="margin-top: 20px; font-weight: bold;">
+    Cheers,<br>
+    Team BDCOE 🎂🎈
+  </p>
+</div>
+
     `,
   };
 

@@ -2,8 +2,10 @@ import fs from 'fs';
 import csv from 'csv-parser';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
+import path from 'path' ;
 
 dotenv.config();
+const filePath = path.join(process.cwd(), 'public', 'members.csv');
 
 const readMembersData = (filePath) => {
   return new Promise((resolve, reject) => {
@@ -16,14 +18,20 @@ const readMembersData = (filePath) => {
   });
 };
 
+
 const sendBirthdayEmail = async (member) => {
   const transporter = nodemailer.createTransport({
-    service: 'gmail', 
+    service: 'gmail',
     auth: {
-      user: process.env.USER, 
-      pass: process.env.PASS  
+      user: process.env.USER,
+      pass: process.env.PASS
+    },
+    secure: false,
+    tls: {
+      rejectUnauthorized: false
     }
   });
+  
 
   const mailOptions = {
     from: 'Team BDCOE <apoorvbraj@gmail.com>',  
@@ -44,13 +52,17 @@ const sendBirthdayEmail = async (member) => {
 
 const sendAdminAlert = async (members) => {
   const transporter = nodemailer.createTransport({
-    service: 'gmail', 
+    service: 'gmail',
     auth: {
-      user: process.env.USER, 
-      pass: process.env.PASS 
+      user: process.env.USER,
+      pass: process.env.PASS
+    },
+    secure: false,
+    tls: {
+      rejectUnauthorized: false
     }
   });
-
+  
   const mailOptions = {
     from: 'Team BDCOE <apoorvbraj@gmail.com>',
     to: 'apurvabraj@gmail.com',  
@@ -64,7 +76,7 @@ const sendAdminAlert = async (members) => {
 
 export default async function handler(req, res) {
   try {
-    const members = await readMembersData('./members.csv');
+    const members = await readMembersData(filePath);
     const today = new Date();
     const todayStr = `${String(today.getDate()).padStart(2, '0')}-${String(today.getMonth() + 1).padStart(2, '0')}`;
 
